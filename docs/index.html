@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25년생 뱀띠 육아파파 모임 통계 리포트</title>
+  <style>
+    :root {
+      --bg: #f8f4ea;
+      --paper: rgba(255, 252, 246, 0.88);
+      --line: rgba(71, 92, 72, 0.12);
+      --text: #24332a;
+      --muted: #667463;
+      --sage: #7ea084;
+      --sage-strong: #4d6f58;
+      --mint: #d9ebd8;
+      --gold: #ddb467;
+      --peach: #f4cdb6;
+      --shadow: 0 22px 60px rgba(70, 74, 55, 0.12);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --container: min(1180px, calc(100vw - 32px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Segoe UI Variable Display", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(232, 217, 186, 0.78), transparent 30%),
+        radial-gradient(circle at top right, rgba(214, 239, 214, 0.72), transparent 26%),
+        linear-gradient(180deg, #fcf9f2 0%, #f6f0e2 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.38;
+      background-image:
+        radial-gradient(circle at 24px 24px, rgba(126, 160, 132, 0.1) 0 22px, transparent 23px),
+        radial-gradient(circle at 72px 56px, rgba(221, 180, 103, 0.08) 0 20px, transparent 21px);
+      background-size: 96px 88px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 78%);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page-shell {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 28px 0 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero,
+    .panel,
+    .stat-card,
+    .spotlight-card,
+    .summary-pill {
+      background: var(--paper);
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 24px;
+      padding: 30px;
+      border-radius: calc(var(--radius-xl) + 6px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 235, 216, 0.9), rgba(217, 235, 216, 0));
+      opacity: 0.9;
+    }
+
+    .hero-copy,
+    .hero-art {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--sage-strong);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      letter-spacing: -0.04em;
+      line-height: 1.12;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4.8vw, 4.5rem);
+      max-width: 11ch;
+    }
+
+    .hero-chips,
+    .summary-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-chips {
+      margin-top: 22px;
+    }
+
+    .summary-pill {
+      padding: 13px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(77, 111, 88, 0.12);
+      color: var(--text);
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .summary-pill span {
+      color: var(--sage-strong);
+    }
+
+    .hero-art {
+      display: grid;
+      gap: 14px;
+      align-content: center;
+    }
+
+    .art-card {
+      border-radius: 30px;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.84), transparent 28%),
+        linear-gradient(180deg, rgba(253, 250, 243, 0.98), rgba(241, 247, 235, 0.94));
+      border: 1px solid rgba(126, 160, 132, 0.14);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: auto;
+      animation: float 4.8s ease-in-out infinite;
+    }
+
+    .art-caption {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .caption-card {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(77, 111, 88, 0.1);
+    }
+
+    .caption-card strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-top: 6px;
+      color: var(--sage-strong);
+    }
+
+    .caption-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .stat-grid,
+    .panel-grid,
+    .spotlight-grid,
+    .timeline-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .stat-card {
+      padding: 22px;
+      border-radius: 28px;
+    }
+
+    .stat-card p:first-child {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(1.6rem, 2.8vw, 2.35rem);
+      color: var(--sage-strong);
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .panel-grid {
+      grid-template-columns: 1.22fr 0.78fr;
+      margin-top: 20px;
+    }
+
+    .panel {
+      padding: 24px;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 217, 186, 0.5), rgba(232, 217, 186, 0));
+      pointer-events: none;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .panel-copy {
+      color: var(--muted);
+      max-width: 58ch;
+      line-height: 1.68;
+    }
+
+    .panel-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(217, 235, 216, 0.9);
+      color: var(--sage-strong);
+      font-weight: 800;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .ranking-chart {
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr) 84px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .ranking-label {
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .ranking-track {
+      position: relative;
+      min-height: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: rgba(225, 234, 219, 0.7);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(77, 111, 88, 0.08);
+      display: flex;
+      align-items: stretch;
+    }
+
+    .ranking-bar {
+      min-width: 54px;
+      height: 100%;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 8px;
+      padding: 0 14px;
+      border-radius: inherit;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 42%),
+        linear-gradient(90deg, #9fbd8d 0%, #6f9a72 55%, #51745b 100%);
+      color: #fffef9;
+      font-weight: 800;
+      transition: width 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .ranking-bar span {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .flash-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flash-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(77, 111, 88, 0.1);
+    }
+
+    .flash-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.18rem;
+      color: var(--sage-strong);
+    }
+
+    .flash-card span {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .ranking-meta {
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .column-chart {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 14px;
+      align-items: end;
+      min-height: 290px;
+      padding-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .column-chart::before {
+      content: "";
+      position: absolute;
+      inset: 12px 0 38px;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(77, 111, 88, 0.08) 0 1px, transparent 1px 33.33%, rgba(77, 111, 88, 0.08) 33.33% calc(33.33% + 1px), transparent calc(33.33% + 1px) 66.66%, rgba(77, 111, 88, 0.08) 66.66% calc(66.66% + 1px), transparent calc(66.66% + 1px) 100%);
+      pointer-events: none;
+    }
+
+    .column-item {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .column-value {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -115%);
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--sage-strong);
+      white-space: nowrap;
+    }
+
+    .column-bar-shell {
+      width: 100%;
+      height: 190px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .column-bar {
+      width: min(56px, 100%);
+      position: relative;
+      overflow: visible;
+      border-radius: 22px 22px 14px 14px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0)),
+        linear-gradient(180deg, #f3d387 0%, #d7a75e 48%, #bd8a4c 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        0 12px 28px rgba(189, 138, 76, 0.18);
+      transition: height 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .column-item strong {
+      font-size: 0.95rem;
+    }
+
+    .column-item span {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.45;
+    }
+
+    .line-chart-card {
+      position: relative;
+      z-index: 1;
+    }
+
+    .line-chart {
+      width: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .line-chart text {
+      font-family: inherit;
+    }
+
+    .axis-label {
+      fill: #7a8777;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .value-label {
+      fill: var(--sage-strong);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .grid-line {
+      stroke: rgba(77, 111, 88, 0.12);
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+    }
+
+    .line-fill {
+      fill: rgba(217, 235, 216, 0.85);
+    }
+
+    .line-stroke {
+      fill: none;
+      stroke: #5f8467;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .line-dot {
+      fill: #fffef8;
+      stroke: #5f8467;
+      stroke-width: 4;
+    }
+
+    .aside-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .aside-item {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(77, 111, 88, 0.1);
+    }
+
+    .aside-item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .aside-item p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.94rem;
+    }
+
+    .spotlight-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 20px;
+    }
+
+    .spotlight-card {
+      padding: 24px;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      top: -90px;
+      right: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0));
+    }
+
+    .spotlight-card.early {
+      background: linear-gradient(180deg, rgba(255, 246, 235, 0.94), rgba(255, 252, 246, 0.9));
+    }
+
+    .spotlight-card.late {
+      background: linear-gradient(180deg, rgba(239, 248, 235, 0.94), rgba(255, 252, 246, 0.9));
+    }
+
+    .spotlight-card h3 {
+      font-size: 1.5rem;
+    }
+
+    .spotlight-avatar {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 84px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .baby-duo {
+      display: inline-flex;
+      align-items: end;
+      gap: 10px;
+    }
+
+    .baby-face {
+      width: 72px;
+      height: 72px;
+      position: relative;
+      border-radius: 28px 28px 24px 24px;
+      background: linear-gradient(180deg, #ffe7d2 0%, #ffd8bb 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 12px 20px rgba(132, 93, 65, 0.12);
+    }
+
+    .baby-face::before,
+    .baby-face::after {
+      content: "";
+      position: absolute;
+      top: 30px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4e433b;
+    }
+
+    .baby-face::before {
+      left: 21px;
+    }
+
+    .baby-face::after {
+      right: 21px;
+    }
+
+    .baby-cheeks {
+      position: absolute;
+      inset: 0;
+    }
+
+    .baby-cheeks::before,
+    .baby-cheeks::after {
+      content: "";
+      position: absolute;
+      top: 41px;
+      width: 12px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(231, 144, 144, 0.45);
+    }
+
+    .baby-cheeks::before {
+      left: 13px;
+    }
+
+    .baby-cheeks::after {
+      right: 13px;
+    }
+
+    .baby-mouth {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      width: 18px;
+      height: 10px;
+      transform: translateX(-50%);
+      border-bottom: 3px solid #c97d73;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .baby-boy .baby-hair,
+    .baby-girl .baby-hair {
+      position: absolute;
+      left: 50%;
+      top: -7px;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 18px;
+      border-radius: 14px 14px 2px 2px;
+      background: #7b6556;
+    }
+
+    .baby-boy .baby-hair::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: 2px;
+      width: 10px;
+      height: 12px;
+      border-top: 3px solid #7b6556;
+      border-right: 3px solid #7b6556;
+      border-radius: 0 10px 0 0;
+      transform: rotate(18deg);
+    }
+
+    .baby-boy {
+      background: linear-gradient(180deg, #e5f0ff 0%, #d5e7ff 100%);
+    }
+
+    .baby-girl {
+      background: linear-gradient(180deg, #ffe5ef 0%, #ffd8e7 100%);
+    }
+
+    .baby-girl .baby-bow {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      width: 28px;
+      height: 16px;
+      transform: translateX(-50%);
+    }
+
+    .baby-girl .baby-bow::before,
+    .baby-girl .baby-bow::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background: #f08ca8;
+      border-radius: 4px 10px 4px 10px;
+    }
+
+    .baby-girl .baby-bow::before {
+      left: 0;
+      transform: rotate(18deg);
+    }
+
+    .baby-girl .baby-bow::after {
+      right: 0;
+      transform: scaleX(-1) rotate(18deg);
+    }
+
+    .baby-girl .baby-bow span {
+      position: absolute;
+      left: 50%;
+      top: 4px;
+      width: 8px;
+      height: 8px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #e27091;
+    }
+
+    .spotlight-sub {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .spotlight-name {
+      margin-top: 16px;
+      font-size: 1.32rem;
+      font-weight: 900;
+      color: var(--sage-strong);
+    }
+
+    .spotlight-date {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(77, 111, 88, 0.12);
+      font-weight: 800;
+    }
+
+    .spotlight-meta {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .timeline-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 32px;
+    }
+
+    .timeline-panel {
+      margin-top: 28px;
+    }
+
+    .timeline-card {
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(77, 111, 88, 0.1);
+      box-shadow: 0 14px 34px rgba(77, 111, 88, 0.08);
+      position: relative;
+    }
+
+    .timeline-card .date {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(217, 235, 216, 0.9);
+      color: var(--sage-strong);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .timeline-card h3 {
+      margin-top: 12px;
+      font-size: 1.12rem;
+    }
+
+    .timeline-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .timeline-tags span,
+    .timeline-attendee-button {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(244, 205, 182, 0.35);
+      color: #936150;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .timeline-attendee-button {
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(147, 97, 80, 0.14);
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 800;
+      line-height: 1;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 245, 0.98), rgba(246, 221, 205, 0.92));
+      color: #875646;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.72),
+        0 6px 14px rgba(147, 97, 80, 0.12);
+      transition:
+        transform 0.16s ease,
+        background-color 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease;
+    }
+
+    .timeline-attendee-button::after {
+      content: "▾";
+      font-size: 0.78rem;
+      line-height: 1;
+      opacity: 0.78;
+    }
+
+    .timeline-attendee-button:hover,
+    .timeline-attendee-button:focus-visible {
+      transform: translateY(-1px) scale(1.01);
+      background:
+        linear-gradient(180deg, rgba(255, 248, 240, 1), rgba(242, 209, 190, 0.95));
+      border-color: rgba(147, 97, 80, 0.24);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.82),
+        0 10px 18px rgba(147, 97, 80, 0.16);
+      outline: none;
+    }
+
+    .timeline-attendee-button[aria-expanded="true"] {
+      background:
+        linear-gradient(180deg, rgba(242, 209, 190, 0.98), rgba(236, 191, 168, 0.94));
+      border-color: rgba(147, 97, 80, 0.3);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 8px 18px rgba(147, 97, 80, 0.18);
+    }
+
+    .timeline-attendee-button[aria-expanded="true"]::after {
+      content: "▴";
+    }
+
+    .timeline-tooltip {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 253, 248, 0.96);
+      border: 1px solid rgba(77, 111, 88, 0.12);
+      box-shadow: 0 14px 28px rgba(77, 111, 88, 0.12);
+      z-index: 2;
+    }
+
+    .timeline-tooltip[hidden] {
+      display: none;
+    }
+
+    .timeline-tooltip-title {
+      margin: 0 0 10px;
+      color: var(--sage-strong);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .timeline-tooltip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .timeline-tooltip-list span {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(217, 235, 216, 0.82);
+      color: var(--sage-strong);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .panel-grid,
+      .spotlight-grid,
+      .timeline-grid,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100vw - 20px, 1180px);
+        padding: 12px 0 36px;
+      }
+
+      .hero,
+      .panel,
+      .spotlight-card,
+      .stat-card {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .hero-chips,
+      .summary-strip,
+      .art-caption {
+        grid-template-columns: 1fr;
+      }
+
+      .art-caption {
+        display: grid;
+      }
+
+      .ranking-row {
+        grid-template-columns: 90px minmax(0, 1fr);
+      }
+
+      .flash-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .ranking-meta {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .column-chart {
+        gap: 10px;
+      }
+
+      .column-bar {
+        width: 100%;
+      }
+
+      .timeline-tags span {
+        font-size: 0.74rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Blue Snake 25 Papa Club</p>
+        <h1>25년생 뱀띠 육아파파 모임 통계 리포트</h1>
+        <div class="hero-chips" id="heroChips"></div>
+      </div>
+
+      <div class="hero-art">
+        <div class="art-card">
+          <svg viewBox="0 0 640 640" aria-label="2025년 뱀띠 아기를 형상화한 일러스트" role="img">
+            <rect width="640" height="640" rx="48" fill="#F8F4EC"></rect>
+            <circle cx="320" cy="282" r="188" fill="#E8D9BA"></circle>
+            <path d="M426 215C426 162.533 383.467 120 331 120H310C218.91 120 145 193.91 145 285V308C145 397.47 217.53 470 307 470H352C421.036 470 477 414.036 477 345C477 275.964 421.036 220 352 220H295C268.49 220 247 241.49 247 268C247 294.51 268.49 316 295 316H375" stroke="#7EA084" stroke-width="34" stroke-linecap="round"></path>
+            <circle cx="264" cy="244" r="75" fill="#FFE8D5"></circle>
+            <path d="M214 225C214 199.595 234.595 179 260 179H267C292.405 179 313 199.595 313 225V279H214V225Z" fill="#FFE8D5"></path>
+            <circle cx="239" cy="239" r="8" fill="#3A3A3A"></circle>
+            <circle cx="287" cy="239" r="8" fill="#3A3A3A"></circle>
+            <path d="M247 272C254.333 280 271.8 284.4 283 272" stroke="#D9967B" stroke-width="8" stroke-linecap="round"></path>
+            <path d="M220 188C227.819 175.779 241.464 168 256.05 168H271.95C286.536 168 300.181 175.779 308 188V205H220V188Z" fill="#7B6556"></path>
+            <path d="M320 137C331.437 152.273 337.156 165.606 337.156 177C337.156 194.673 324.673 207 307 207C289.327 207 276.844 194.673 276.844 177C276.844 165.606 282.563 152.273 294 137C300.899 128.508 313.101 128.508 320 137Z" fill="#9DB48E"></path>
+            <circle cx="392" cy="313" r="17" fill="#4B5D4B"></circle>
+            <circle cx="401" cy="309" r="4" fill="#F7F3EB"></circle>
+            <path d="M416 333C427.5 343 441.333 347.833 457.5 347.5" stroke="#D57269" stroke-width="7" stroke-linecap="round"></path>
+            <path d="M454 346L470 338" stroke="#D57269" stroke-width="7" stroke-linecap="round"></path>
+            <path d="M202 395C241.667 420 289.333 432.5 345 432.5C400.667 432.5 441 419 466 392" stroke="#DDBE87" stroke-width="20" stroke-linecap="round" opacity="0.8"></path>
+            <circle cx="210" cy="169" r="13" fill="#DDBE87"></circle>
+            <circle cx="190" cy="191" r="8" fill="#DDBE87"></circle>
+            <circle cx="429" cy="173" r="10" fill="#DDBE87"></circle>
+          </svg>
+        </div>
+        <div class="art-caption">
+          <div class="caption-card">
+            <span>최다 출석 파파</span>
+            <strong id="topPapaLabel">-</strong>
+          </div>
+          <div class="caption-card">
+            <span>최다 참석 정모</span>
+            <strong id="bestMonthLabel">-</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stat-grid" id="statGrid">
+      <article class="stat-card">
+        <p>총 모임 수</p>
+        <strong id="eventCountStat">-</strong>
+      </article>
+      <article class="stat-card">
+        <p>누적 참석 인원</p>
+        <strong id="attendanceTotalStat">-</strong>
+      </article>
+      <article class="stat-card">
+        <p>참석 파파수</p>
+        <strong id="uniquePapaStat">-</strong>
+      </article>
+      <article class="stat-card">
+        <p>회당 평균 참석</p>
+        <strong id="averageStat">-</strong>
+      </article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Attendance Ranking</p>
+            <h2>누가 제일 자주 얼굴을 비췄나</h2>
+          </div>
+          <span class="panel-tag">가로 막대 차트</span>
+        </div>
+        <p class="panel-copy">
+          가장 많이 참석한 파파의 순서입니다.
+        </p>
+        <div class="ranking-chart" id="rankingChart"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Lightning Summary</p>
+            <h2>번개는 번개답게</h2>
+          </div>
+          <span class="panel-tag">번개 별도 통계</span>
+        </div>
+        <div class="flash-summary" id="flashSummary"></div>
+        <div class="aside-list" id="asideList"></div>
+      </article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Monthly Attendance</p>
+            <h2>월별 참석 인원 추이</h2>
+          </div>
+          <span class="panel-tag">컬럼 차트</span>
+        </div>
+        <div class="column-chart" id="monthlyAttendanceChart"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Fresh Faces</p>
+            <h2>월별 새로운 파파 참석</h2>
+          </div>
+          <span class="panel-tag">라인 차트</span>
+        </div>
+        <p class="panel-copy">
+          처음으로 정모에 `참석`이 찍힌 파파 기준입니다. 모임의 기본 골격이 어떤 달에 넓어졌는지
+          보기 좋게 따로 뽑았습니다.
+        </p>
+        <div class="line-chart-card">
+          <svg id="lineChart" class="line-chart" viewBox="0 0 640 260" aria-label="월별 새 참여 인원 라인 차트"></svg>
+        </div>
+      </article>
+    </section>
+
+    <section class="spotlight-grid">
+      <article class="spotlight-card early">
+        <p class="eyebrow">Earliest Birthday</p>
+        <h3>가장 먼저 세상 구경한 아기</h3>
+        <div class="spotlight-avatar" id="earliestAvatar" aria-hidden="true"></div>
+        <div class="spotlight-name" id="earliestName">-</div>
+        <div class="spotlight-date" id="earliestDate">-</div>
+        <p class="spotlight-meta" id="earliestMeta">-</p>
+      </article>
+
+      <article class="spotlight-card late">
+        <p class="eyebrow">Latest Birthday</p>
+        <h3>가장 천천히 등장한 막내 아기</h3>
+        <div class="spotlight-avatar" id="latestAvatar" aria-hidden="true"></div>
+        <div class="spotlight-name" id="latestName">-</div>
+        <div class="spotlight-date" id="latestDate">-</div>
+        <p class="spotlight-meta" id="latestMeta">-</p>
+      </article>
+    </section>
+
+    <section class="panel timeline-panel">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Event Trail</p>
+          <h2>모임 발자국 타임라인</h2>
+        </div>
+        <span class="panel-tag">행사 기록</span>
+      </div>
+      <div class="timeline-grid" id="timelineGrid"></div>
+    </section>
+
+  </div>
+  <script>
+    const reportData = {
+      attendanceCounts: [
+        { nickname: "지아파파", count: 9, firstMonth: "2025-10" },
+        { nickname: "우주파파", count: 8, firstMonth: "2025-11" },
+        { nickname: "도윤파파", count: 6, firstMonth: "2025-11" },
+        { nickname: "예린파파", count: 6, firstMonth: "2025-12" },
+        { nickname: "이현파파", count: 5, firstMonth: "2025-10" },
+        { nickname: "채윤파파", count: 4, firstMonth: "2025-11" },
+        { nickname: "희온파파", count: 4, firstMonth: "2025-10" },
+        { nickname: "규영파파", count: 3, firstMonth: "2026-02" },
+        { nickname: "시혁파파", count: 3, firstMonth: "2025-12" },
+        { nickname: "재원파파", count: 3, firstMonth: "2025-11" },
+        { nickname: "유로파파", count: 2, firstMonth: "2026-02" },
+        { nickname: "주빈주아파파", count: 2, firstMonth: "2026-03" },
+        { nickname: "준우파파", count: 2, firstMonth: "2026-03" },
+        { nickname: "채하파파", count: 2, firstMonth: "2026-02" },
+        { nickname: "정원파파", count: 1, firstMonth: "2025-10" },
+        { nickname: "지훈파파", count: 1, firstMonth: "2026-03" },
+        { nickname: "채현채이파파", count: 1, firstMonth: "2025-12" },
+        { nickname: "현이파파", count: 1, firstMonth: "2026-02" }
+      ],
+      monthlyTotals: [
+        { month: "2025-10", attendanceTotal: 4, uniqueAttendees: 4, eventCount: 1 },
+        { month: "2025-11", attendanceTotal: 6, uniqueAttendees: 6, eventCount: 1 },
+        { month: "2025-12", attendanceTotal: 5, uniqueAttendees: 5, eventCount: 1 },
+        { month: "2026-01", attendanceTotal: 8, uniqueAttendees: 8, eventCount: 1 },
+        { month: "2026-02", attendanceTotal: 13, uniqueAttendees: 11, eventCount: 2 },
+        { month: "2026-03", attendanceTotal: 16, uniqueAttendees: 12, eventCount: 2 },
+        { month: "2026-04", attendanceTotal: 11, uniqueAttendees: 11, eventCount: 1 }
+      ],
+      monthlyNew: [
+        { month: "2025-10", newParticipants: 4 },
+        { month: "2025-11", newParticipants: 4 },
+        { month: "2025-12", newParticipants: 3 },
+        { month: "2026-01", newParticipants: 0 },
+        { month: "2026-02", newParticipants: 4 },
+        { month: "2026-03", newParticipants: 3 },
+        { month: "2026-04", newParticipants: 0 }
+      ],
+      events: [
+        { date: "2025-10-13", month: "2025-10", type: "정모", place: "만리장성", count: 4, attendees: ["지아파파", "정원파파", "이현파파", "희온파파"] },
+        { date: "2025-11-03", month: "2025-11", type: "정모", place: "오늘족발", count: 6, attendees: ["지아파파", "이현파파", "채윤파파", "도윤파파", "재원파파", "우주파파"] },
+        { date: "2025-12-13", month: "2025-12", type: "정모", place: "올레길한잔", count: 5, attendees: ["지아파파", "우주파파", "채현채이파파", "예린파파", "시혁파파"] },
+        { date: "2026-01-10", month: "2026-01", type: "정모", place: "신금호숯불갈비", count: 8, attendees: ["지아파파", "이현파파", "희온파파", "채윤파파", "도윤파파", "우주파파", "예린파파", "시혁파파"] },
+        { date: "2026-02-07", month: "2026-02", type: "정모", place: "옥수해물찜칼국수", count: 9, attendees: ["지아파파", "채윤파파", "도윤파파", "재원파파", "우주파파", "현이파파", "유로파파", "규영파파", "채하파파"] },
+        { date: "2026-02-26", month: "2026-02", type: "번개", place: "포차포포", count: 4, attendees: ["지아파파", "우주파파", "예린파파", "시혁파파"] },
+        { date: "2026-03-14", month: "2026-03", type: "정모", place: "만족오향족발", count: 10, attendees: ["지아파파", "이현파파", "희온파파", "도윤파파", "우주파파", "예린파파", "채하파파", "준우파파", "지훈파파", "주빈주아파파"] },
+        { date: "2026-03-27", month: "2026-03", type: "번개", place: "탐라순대국", count: 6, attendees: ["지아파파", "도윤파파", "재원파파", "우주파파", "예린파파", "규영파파"] },
+        { date: "2026-04-11", month: "2026-04", type: "정모", place: "만포막국수", count: 11, attendees: ["지아파파", "이현파파", "희온파파", "채윤파파", "도윤파파", "우주파파", "예린파파", "유로파파", "규영파파", "준우파파", "주빈주아파파"] }
+      ],
+      earliest: {
+        nickname: "채현채이파파",
+        count: 1,
+        birthdayText: "2026-01-15",
+        gender: "아들/딸",
+        company: "삼성전자",
+        job: ""
+      },
+      latest: {
+        nickname: "규영파파",
+        count: 3,
+        birthdayText: "2026-12-17",
+        gender: "아들",
+        company: "외식업",
+        job: ""
+      }
+    };
+
+    function formatMonth(month) {
+      return month.replace("-", ".").replace(/^20/, "");
+    }
+
+    function formatFullMonth(month) {
+      const [year, m] = month.split("-");
+      return `${year}년 ${Number(m)}월`;
+    }
+
+    function formatDate(dateText) {
+      return dateText.split("-").join(".");
+    }
+
+    function formatBirthdayLabel(dateText) {
+      const [year, month, day] = dateText.split("-").map(Number);
+      return `${year}년 ${month}월 ${day}일 생`;
+    }
+
+    function stripPapaLabel(nickname) {
+      return nickname.split("파파").join("").trim();
+    }
+
+    function createBabyFaceMarkup(type) {
+      if (type === "girl") {
+        return `
+          <div class="baby-face baby-girl">
+            <div class="baby-hair"></div>
+            <div class="baby-bow"><span></span></div>
+            <div class="baby-cheeks"></div>
+            <div class="baby-mouth"></div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="baby-face baby-boy">
+          <div class="baby-hair"></div>
+          <div class="baby-cheeks"></div>
+          <div class="baby-mouth"></div>
+        </div>
+      `;
+    }
+
+    function createBabyAvatarMarkup(gender) {
+      if (gender.includes("아들") && gender.includes("딸")) {
+        return `
+          <div class="baby-duo">
+            ${createBabyFaceMarkup("boy")}
+            ${createBabyFaceMarkup("girl")}
+          </div>
+        `;
+      }
+
+      if (gender.includes("딸")) {
+        return createBabyFaceMarkup("girl");
+      }
+
+      return createBabyFaceMarkup("boy");
+    }
+
+    function getEventsByType(type) {
+      return reportData.events.filter((event) => event.type === type);
+    }
+
+    function buildMonthlyAttendance(events) {
+      const monthlyMap = new Map();
+
+      events.forEach((event) => {
+        if (!monthlyMap.has(event.month)) {
+          monthlyMap.set(event.month, {
+            month: event.month,
+            attendanceTotal: 0,
+            uniqueAttendees: new Set(),
+            eventCount: 0
+          });
+        }
+
+        const bucket = monthlyMap.get(event.month);
+        bucket.attendanceTotal += event.count;
+        bucket.eventCount += 1;
+        event.attendees.forEach((nickname) => bucket.uniqueAttendees.add(nickname));
+      });
+
+      return [...monthlyMap.values()]
+        .sort((a, b) => a.month.localeCompare(b.month))
+        .map((item) => ({
+          month: item.month,
+          attendanceTotal: item.attendanceTotal,
+          uniqueAttendees: item.uniqueAttendees.size,
+          eventCount: item.eventCount
+        }));
+    }
+
+    function buildMonthlyNew(events) {
+      const firstMonthByPapa = new Map();
+      const eventMonths = [...new Set(events.map((event) => event.month))].sort();
+
+      [...events]
+        .sort((a, b) => a.date.localeCompare(b.date))
+        .forEach((event) => {
+          event.attendees.forEach((nickname) => {
+            if (!firstMonthByPapa.has(nickname)) {
+              firstMonthByPapa.set(nickname, event.month);
+            }
+          });
+        });
+
+      const monthMap = new Map();
+      eventMonths.forEach((month) => monthMap.set(month, 0));
+      firstMonthByPapa.forEach((month) => {
+        monthMap.set(month, (monthMap.get(month) || 0) + 1);
+      });
+
+      return [...monthMap.entries()]
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([month, newParticipants]) => ({ month, newParticipants }));
+    }
+
+    function createSummary() {
+      const regularEvents = getEventsByType("정모");
+      const lightningEvents = getEventsByType("번개");
+      const allMonthlyTotals = buildMonthlyAttendance(reportData.events);
+      const regularMonthlyTotals = buildMonthlyAttendance(regularEvents);
+      const regularMonthlyNew = buildMonthlyNew(regularEvents);
+      const lightningMonthlyTotals = buildMonthlyAttendance(lightningEvents);
+      const totalAttendance = allMonthlyTotals.reduce((sum, item) => sum + item.attendanceTotal, 0);
+      const eventCount = reportData.events.length;
+      const uniquePapa = reportData.attendanceCounts.length;
+      const regularAttendanceTotal = regularMonthlyTotals.reduce((sum, item) => sum + item.attendanceTotal, 0);
+      const averageAttendance = (regularAttendanceTotal / regularEvents.length).toFixed(1);
+      const topPapa = reportData.attendanceCounts[0];
+      const bestMonth = [...regularMonthlyTotals].sort((a, b) => b.attendanceTotal - a.attendanceTotal)[0];
+
+      document.getElementById("heroChips").innerHTML = [
+        `<div class="summary-pill"><span>총 모임</span> ${eventCount}회</div>`,
+        `<div class="summary-pill"><span>누적 참석</span> ${totalAttendance}회</div>`,
+        `<div class="summary-pill"><span>실참석 파파</span> ${uniquePapa}명</div>`,
+        `<div class="summary-pill"><span>정모 평균</span> ${averageAttendance}명</div>`
+      ].join("");
+
+      document.getElementById("topPapaLabel").textContent = `${topPapa.nickname} ${topPapa.count}회`;
+      document.getElementById("bestMonthLabel").textContent = `${formatFullMonth(bestMonth.month)} · ${bestMonth.attendanceTotal}명`;
+
+      document.getElementById("eventCountStat").textContent = `${eventCount}회`;
+      document.getElementById("attendanceTotalStat").textContent = `${totalAttendance}회`;
+      document.getElementById("uniquePapaStat").textContent = `${uniquePapa}명`;
+      document.getElementById("averageStat").textContent = `${averageAttendance}명`;
+
+      const firstWave = regularMonthlyNew.find((item) => item.month === "2025-10");
+      const springBoost = regularMonthlyTotals.find((item) => item.month === "2026-03");
+      const steadyCrew = reportData.attendanceCounts.filter((item) => item.count >= 4).length;
+      const lightningAttendanceTotal = lightningMonthlyTotals.reduce((sum, item) => sum + item.attendanceTotal, 0);
+      const lightningAttendees = [];
+      lightningEvents.forEach((event) => {
+        event.attendees.forEach((name) => {
+          lightningAttendees.push(name);
+        });
+      });
+      const lightningUnique = new Set(lightningAttendees).size;
+      const lightningPeak = [...lightningEvents].sort((a, b) => b.count - a.count)[0];
+      const lightningAverage = lightningEvents.length ? (lightningAttendanceTotal / lightningEvents.length).toFixed(1) : "0.0";
+
+      document.getElementById("flashSummary").innerHTML = [
+        `<div class="flash-card"><span>번개 횟수</span><strong>${lightningEvents.length}회</strong></div>`,
+        `<div class="flash-card"><span>번개 누적 참석</span><strong>${lightningAttendanceTotal}회</strong></div>`,
+        `<div class="flash-card"><span>번개 평균 참석</span><strong>${lightningAverage}명</strong></div>`,
+        `<div class="flash-card"><span>번개 실참석 파파</span><strong>${lightningUnique}명</strong></div>`
+      ].join("");
+
+      document.getElementById("asideList").innerHTML = [
+        {
+          title: "출석왕의 미소는 조용히 강했다",
+          text: `${topPapa.nickname}가 ${topPapa.count}회로 1위입니다. 첫 모임부터 지금까지 거의 빠짐없이 등장한, 말 그대로 모임의 기본 체온입니다.`
+        },
+        {
+          title: "정모만 놓고 보면 끝판왕은 4월",
+          text: `${formatFullMonth(bestMonth.month)} 정모 참석이 ${bestMonth.attendanceTotal}회로 최고였습니다. 정모 기준으로 보면 모임의 상승 곡선이 마지막까지 살아 있었습니다.`
+        },
+        {
+          title: "정모 신규 유입은 초반과 2월에 특히 좋았다",
+          text: `첫 달에 새 얼굴 ${firstWave.newParticipants}명이 들어왔고, 2월에도 다시 신규 참여가 살아났습니다. 한 번 생긴 모임이 아니라 서서히 커진 모임에 가깝습니다.`
+        },
+        {
+          title: "고정 멤버층도 제법 탄탄",
+          text: `${steadyCrew}명의 파파가 4회 이상 참석했습니다. 육아 모임에서 이 정도면 '다음에 또 보자'가 실제로 지켜진 셈입니다.`
+        },
+        {
+          title: "번개는 짧고 굵게, 최고치는 탐라순대국",
+          text: `${lightningPeak.place} 번개에 ${lightningPeak.count}명이 모였습니다. 번개는 횟수는 적어도 한번 열리면 밀도 있게 모이는 편이었습니다.`
+        }
+      ].map((item) => `
+        <div class="aside-item">
+          <strong>${item.title}</strong>
+          <p>${item.text}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderRankingChart() {
+      const maxCount = Math.max(...reportData.attendanceCounts.map((item) => item.count));
+      const chart = document.getElementById("rankingChart");
+
+      chart.innerHTML = reportData.attendanceCounts.map((item) => {
+        const width = Math.max(18, (item.count / maxCount) * 100);
+        return `
+          <div class="ranking-row">
+            <div class="ranking-label">${item.nickname}</div>
+            <div class="ranking-track">
+              <div class="ranking-bar" style="width: ${width}%">
+                <span>${item.count}회</span>
+              </div>
+            </div>
+            <div class="ranking-meta">첫 참석 ${formatMonth(item.firstMonth)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderMonthlyAttendanceChart() {
+      const items = buildMonthlyAttendance(getEventsByType("정모"));
+      const maxValue = Math.max(...items.map((item) => item.attendanceTotal));
+      const chart = document.getElementById("monthlyAttendanceChart");
+
+      chart.innerHTML = items.map((item) => {
+        const height = Math.max(12, (item.attendanceTotal / maxValue) * 100);
+        return `
+          <div class="column-item">
+            <div class="column-bar-shell">
+              <div class="column-bar" style="height: ${height}%">
+                <div class="column-value">${item.attendanceTotal}명</div>
+              </div>
+            </div>
+            <strong>${formatMonth(item.month)}</strong>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderLineChart() {
+      const items = buildMonthlyNew(getEventsByType("정모"));
+      const svg = document.getElementById("lineChart");
+      const width = 640;
+      const height = 260;
+      const padLeft = 42;
+      const padRight = 22;
+      const padTop = 26;
+      const padBottom = 46;
+      const maxValue = Math.max(...items.map((item) => item.newParticipants), 4);
+      const usableWidth = width - padLeft - padRight;
+      const usableHeight = height - padTop - padBottom;
+
+      const x = (index) => padLeft + (usableWidth * index) / (items.length - 1);
+      const y = (value) => padTop + usableHeight - (usableHeight * value) / maxValue;
+
+      const pointList = items.map((item, index) => ({
+        ...item,
+        px: x(index),
+        py: y(item.newParticipants)
+      }));
+
+      const linePath = pointList.map((point, index) => `${index === 0 ? "M" : "L"} ${point.px} ${point.py}`).join(" ");
+      const areaPath = [
+        `M ${pointList[0].px} ${height - padBottom}`,
+        ...pointList.map((point) => `L ${point.px} ${point.py}`),
+        `L ${pointList[pointList.length - 1].px} ${height - padBottom}`,
+        "Z"
+      ].join(" ");
+
+      const horizontalGuides = Array.from({ length: maxValue + 1 }, (_, index) => {
+        const value = maxValue - index;
+        const py = y(value);
+        return `
+          <line class="grid-line" x1="${padLeft}" y1="${py}" x2="${width - padRight}" y2="${py}"></line>
+          <text class="axis-label" x="${padLeft - 10}" y="${py + 4}" text-anchor="end">${value}</text>
+        `;
+      }).join("");
+
+      const pointsMarkup = pointList.map((point) => `
+        <circle class="line-dot" cx="${point.px}" cy="${point.py}" r="8"></circle>
+        <text class="value-label" x="${point.px}" y="${point.py - 16}" text-anchor="middle">${point.newParticipants}</text>
+        <text class="axis-label" x="${point.px}" y="${height - 18}" text-anchor="middle">${formatMonth(point.month)}</text>
+      `).join("");
+
+      svg.innerHTML = `
+        ${horizontalGuides}
+        <path class="line-fill" d="${areaPath}"></path>
+        <path class="line-stroke" d="${linePath}"></path>
+        ${pointsMarkup}
+      `;
+    }
+
+    function renderSpotlightCards() {
+      const earliest = reportData.earliest;
+      const latest = reportData.latest;
+      const earliestMeta = document.getElementById("earliestMeta");
+      const latestMeta = document.getElementById("latestMeta");
+      const earliestAvatar = document.getElementById("earliestAvatar");
+      const latestAvatar = document.getElementById("latestAvatar");
+
+      earliestAvatar.innerHTML = createBabyAvatarMarkup(earliest.gender);
+      document.getElementById("earliestName").textContent = `${earliest.gender} ${stripPapaLabel(earliest.nickname)}`;
+      document.getElementById("earliestDate").textContent = formatBirthdayLabel(earliest.birthdayText);
+      earliestMeta.textContent = "";
+      earliestMeta.hidden = true;
+
+      latestAvatar.innerHTML = createBabyAvatarMarkup(latest.gender);
+      document.getElementById("latestName").textContent = `${latest.gender} ${stripPapaLabel(latest.nickname)}`;
+      document.getElementById("latestDate").textContent = formatBirthdayLabel(latest.birthdayText);
+      latestMeta.textContent = "";
+      latestMeta.hidden = true;
+    }
+
+    function renderTimeline() {
+      const grid = document.getElementById("timelineGrid");
+      grid.innerHTML = reportData.events.map((event) => `
+        <article class="timeline-card">
+          <span class="date">${formatDate(event.date)}</span>
+          <h3>${event.place}</h3>
+          <p>${event.type}로 열렸고, 총 <strong>${event.count}명</strong>이 참석했습니다. 한 줄로 말하면, 육아와 식사가 모두 성실했던 날입니다.</p>
+          <div class="timeline-tags">
+            <span>${event.type}</span>
+            <button class="timeline-attendee-button" type="button" data-attendees="${event.attendees.join("|")}">참석 ${event.count}명 보기</button>
+          </div>
+          <div class="timeline-tooltip" hidden>
+            <p class="timeline-tooltip-title">이날 참석한 파파들</p>
+            <div class="timeline-tooltip-list"></div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function setupTimelineTooltips() {
+      const grid = document.getElementById("timelineGrid");
+      if (!grid) {
+        return;
+      }
+
+      function closeAllTooltips() {
+        grid.querySelectorAll(".timeline-tooltip").forEach((tooltip) => {
+          tooltip.hidden = true;
+        });
+        grid.querySelectorAll(".timeline-attendee-button").forEach((button) => {
+          button.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      grid.querySelectorAll(".timeline-attendee-button").forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+
+          const card = button.closest(".timeline-card");
+          const tooltip = card ? card.querySelector(".timeline-tooltip") : null;
+          const list = card ? card.querySelector(".timeline-tooltip-list") : null;
+          if (!card || !tooltip || !list) {
+            return;
+          }
+
+          const isOpening = tooltip.hidden;
+          closeAllTooltips();
+
+          if (!isOpening) {
+            return;
+          }
+
+          const attendees = (button.dataset.attendees || "")
+            .split("|")
+            .map((name) => name.trim())
+            .filter(Boolean);
+
+          list.innerHTML = attendees.map((name) => `<span>${name}</span>`).join("");
+          tooltip.hidden = false;
+          button.setAttribute("aria-expanded", "true");
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!grid.contains(event.target)) {
+          closeAllTooltips();
+        }
+      });
+    }
+
+    createSummary();
+    renderRankingChart();
+    renderMonthlyAttendanceChart();
+    renderLineChart();
+    renderSpotlightCards();
+    renderTimeline();
+    setupTimelineTooltips();
+  </script>
+</body>
+</html>
