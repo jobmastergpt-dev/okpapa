@@ -1348,7 +1348,8 @@
       const uniquePapa = reportData.attendanceCounts.length;
       const regularAttendanceTotal = regularMonthlyTotals.reduce((sum, item) => sum + item.attendanceTotal, 0);
       const averageAttendance = (regularAttendanceTotal / regularEvents.length).toFixed(1);
-      const topPapa = reportData.attendanceCounts[0];
+      const rankingCandidates = reportData.attendanceCounts.filter((item) => item.nickname !== "지아파파");
+      const topPapa = rankingCandidates[0];
       const bestMonth = [...regularMonthlyTotals].sort((a, b) => b.attendanceTotal - a.attendanceTotal)[0];
 
       document.getElementById("heroChips").innerHTML = [
@@ -1417,10 +1418,11 @@
     }
 
     function renderRankingChart() {
-      const maxCount = Math.max(...reportData.attendanceCounts.map((item) => item.count));
+      const rankingCandidates = reportData.attendanceCounts.filter((item) => item.nickname !== "지아파파");
+      const maxCount = Math.max(...rankingCandidates.map((item) => item.count));
       const chart = document.getElementById("rankingChart");
 
-      chart.innerHTML = reportData.attendanceCounts.map((item) => {
+      chart.innerHTML = rankingCandidates.map((item) => {
         const width = Math.max(18, (item.count / maxCount) * 100);
         return `
           <div class="ranking-row">
